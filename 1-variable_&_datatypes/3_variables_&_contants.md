@@ -43,7 +43,7 @@ func main() {
     fmt.Println(globalVarInt, globalVarBool, localVarString, localVarFloat, localVarInt)
 }
 ```
-**Output:** 
+**output:** 
 `0 false  0 10`
 Here `localVarInt` has assigned value 10 after it's declared with zero value.Empty string `""` is zero value of string
 ##### Declaring variables with inital values
@@ -63,9 +63,9 @@ func main() {
     fmt.Println(globalVarInt, globalVarBool, localVarString, localVarFloat, localVarInt)
 }
 ```
-**Output:**
+**output:**
 `5 true hello 789.47 10`
-If you are assiging value at the time of declaring the variable you can omit the type and go compiler would automatically assign the type to the variable.`localVarInt := 10` *is called as short declaration and this syntax is not acceptable declaring global variables.*
+If you are assiging value at the time of declaring the variable you can omit the type and go compiler would automatically assign the type to the variable.`localVarInt := 10` *is called short declaration and this syntax is not acceptable declaring global variables.*
 ##### Block declaration
 We can declare variables in a single block
 ```go
@@ -105,5 +105,5 @@ func main() {
     fmt.Println(name, age, weight, isMarried, address)
 }
 ```
-**Output**
+**output**
 `John 25 63.49 false USA`
