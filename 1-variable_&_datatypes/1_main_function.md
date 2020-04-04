@@ -1,18 +1,20 @@
 ### The Main Function
 Below is a simple go program saved in a file named `main.go` but the file can be named anything.
-``` 
+```go
 package main
 
 import "fmt"
 
 func main() {
+    // single line comment
+
+    /*
+    This is
+    multiline comment
+    */
+    
     fmt.Println("hello world")
 }
-// single line comment
-/*
-This is
-multiline comment
-*/
 ```
 The above program can be run by the command `go run main.go`.
 Output:
