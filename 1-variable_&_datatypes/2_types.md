@@ -19,6 +19,29 @@ GO is a statically typed language i.e every variable always hava a perticular ty
 Operators are different chracters which are used to carry out different operations on operands.
 1. Arithmetic Operators
     These are used to peroform arithmetic operations.`+`(integers,floats,strings),`-`(integers,floats),`/`(integers,floats),`*`(integers,floats),`%`(integers)
+
 2. Comparison Operators
+
+| Operator      | Name               | 
+| ------------- | ------------------ | 
+| ==            | Equal to           | 
+| !=            | Not equal to       | 
+| <             | Less than          | 
+| <=            | Less than or equal      | 
+| >             | Greater  than          | 
+| >=            | Greater than or equal   | 
+* Boolean, integer, float and complex values are compairable
+* Strings are ordered lexically byte wise
+* Two pointers are equal if they points to the same variable or both are `nil`.
+* Two struct values are equal if their corresponding non-blank fields are equal.
+* Two array values are equal if their corresponding elements are equal.
+
 3. Logical Operators
+
+| Operator      | Name               | 
+| ------------- | ------------------ | 
+| &&            | Conditional AND    | 
+| \|\|          | Conditonal OR      | 
+| !             | NOT                |
+
 4. Pointers and Channels
