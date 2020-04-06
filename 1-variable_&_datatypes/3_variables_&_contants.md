@@ -22,7 +22,7 @@ func main() {
 ```
 Variables declared outside of any scope are global variables and variables declared inside any scope is called local variables and are accessible only in the same scopes.Global variables are accessible throught the program.`globalVarInt` is global variable and it's accessible inside the `main` function but `localVarInt` is local variable and only be accessible inside the `main` function.
 
-## Declaring and assigning values to a variable
+### Declaring and assigning values to a variable
 There are many ways we can declar a variable in golang
 ##### Declaring variables with zero values
 Zero values are assigned to variables by go compiler if the variables are not assigned any value at the time of declaration.

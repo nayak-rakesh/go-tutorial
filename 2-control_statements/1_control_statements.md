@@ -41,7 +41,7 @@ func main() {
     }
 }
 ```
-### For Statement
+#### For Statement
 `for` statement used to exicute a code block for specified amount of times.The basic structure of for statement is 
 ```go
 for i := 0; i <= 5; i++ {
@@ -57,7 +57,7 @@ for i <= 5 {
 }
 ```
 While increamenting the value of `i`, we don't have to increament in order of 1.We can increament in order of 2 like `i += 2`.We can also decrease the value of `i` like `i--` or `i -= 2`.There is no `while` statement in go.
-### Switch Statement
+#### Switch Statement
 `switch` statement can be used in place of `if-else` statement.`switch` takes an expression and matchecs with the cases.The type of the expressing should match with the type of the cases.All the cases should be unique i.e should not contain duplicate value.Sometimes `switch` used without an expression and beheaves like `if-else` block. 
 ```go
 i := 10
@@ -89,6 +89,26 @@ switch {
         fmt.Println("i is greater than 9")
 }
 ```
-**output:**
-`i is equal to 2, 3 or 4`
-
+**output:**`i is equal to 2, 3 or 4`  
+#### Continue and Break Statement
+`continue` statement is used to skip itarations based on conditions and `break` statement is used to  break out of the loop.
+```go
+for i := 0; i <= 10; i++ {
+    if i == 5 {
+        continue
+    } else if i == 8 {
+        break
+    }
+    fmt.Println(i)
+}
+```
+***output:**
+```
+0
+1
+2
+3
+4
+6
+7
+```
