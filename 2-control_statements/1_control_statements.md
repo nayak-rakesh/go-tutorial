@@ -1,6 +1,6 @@
 ### Control Statements
 When we run a piece of code, go compiler starts from the top of the code file and start exicuting statements one by one sequentially.Control statements are used to control the flow of the code exicution.We can exicute or skip code blocks depending on the logic provided.We can also exicute a block of code for specified number of times in loop.
-#### If statement
+#### If Statement
 If statement takes an expression which evaluates to be `true` or `false`.If the the expression evalutes to `true` then code block inside of if statement gets exicuted if the expression evalutes to `false` then code block inside of if statement gets skiped.We can use `else`, `if else` along with the `if` statement.
 ```go
 package main

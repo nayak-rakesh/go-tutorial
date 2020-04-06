@@ -107,3 +107,10 @@ func main() {
 ```
 **output:**
 `John 25 63.49 false USA`  
+#### The Underscore(_)
+Sometimes values are assigned to `_`(underscore) instead of regular variables.Go compiler complains if we declare a variable but don't use it.Assigning vlaues to `_` is a way to tell the compiler that the variable is not needed and can be ignored without any error.When we define our custom function which may return multiple values and we might want to discard few values returned from the function.
+```go
+a, _ = func getIntValue() // functions returning 2 integer values
+fmt.Println(a)
+```
+In the above example the second returnd value is discarded and the first values is used further in the program.We will learn more about functions in later tutorials.`_` is also called blank identifier.
