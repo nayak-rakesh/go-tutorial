@@ -11,7 +11,7 @@ func main() {
     intArray1[1] = 12 
     fmt.Printf("The array is %v and first element is %d\n", intArray1, intArray1[0])
 
-    strArray := [3]string{"a", "b", "c"} // declaration and initialization
+    strArray := [3]string{"a", "b", "c"} // declaration and initialization(short hand syntax)
     fmt.Printf("The array is %v and second element is %s\n", strArray, strArray[1])
 
     boolArray := [3]bool{true} 
