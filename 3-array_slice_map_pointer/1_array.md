@@ -21,7 +21,7 @@ func main() {
     */
     floatArray := [...]float64{43.21, 64.45, 78.67}
     // len() returns length of an array and can be used with string
-    fmt.Printf("Lenth of floatArray: %d and type: %T\n", len(floatArray), floatArray)
+    fmt.Printf("Length of floatArray: %d and type: %T\n", len(floatArray), floatArray)
 }
 ```
 **output**
@@ -29,11 +29,11 @@ func main() {
 The array is [11 12] and first element is 11
 The array is [a b c] and second element is b
 [true false false]
-Lenth of floatArray: 3 and type: [3]float64
+Length of floatArray: 3 and type: [3]float64
 ```
-Lenght is included while determining the type of array.We can not change of the size of the array once declared.
+Length is included while determining the type of array.We can not change of the size of the array once declared.
 
-Arrays are value type means when we assign an array to another variable, the copy of the array gets assigned to the variable not the original array.So the changes made in the array referencing the second variable doesn't affect the original arry.Pointers are used if changes are needed in original array
+Arrays are value type means when we assign an array to another variable, the copy of the array gets assigned to the variable not the original array.So the changes made in the array referencing the second variable doesn't affect the original array.Pointers are used if changes are needed in original array
 ```go
 originalArray := [3]int{1, 2, 3}
 copiedArray := originalArray
@@ -101,7 +101,7 @@ sum of the elements of array [3 4] is 7
 [5 6] at index 2
 sum of the elements of array [5 6] is 11
 ```
-We can also use short hand syntax to declar multidiminsional array.
+We can also use short hand syntax to declare multidimensional array.
 ```go
 multArray := [3][2]int{
     {1, 2},

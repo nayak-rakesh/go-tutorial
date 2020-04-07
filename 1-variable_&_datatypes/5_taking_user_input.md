@@ -1,5 +1,5 @@
 ### User Input From Console
-Sometimes we want our program to be dynamic.In such case we take user input from the console instead of hard codeing it in the program.
+Sometimes we want our program to be dynamic.In such case we take user input from the console instead of hard coding it in the program.
 ```go
 package main
 
@@ -46,12 +46,12 @@ import (
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter name: ")
-	text, _ := reader.ReadString('\n') // stopes reading when new line is encounterd
+	text, _ := reader.ReadString('\n') // stops reading when new line is encountered
 	text = text[:len(text)-1] // removing the new line character from the end
     fmt.Println(text)
     
     fmt.Print("Enter num: ")
-	text, _ = reader.ReadString('\n') // stopes reading when new line is encounterd
+	text, _ = reader.ReadString('\n') // stops reading when new line is encountered
 	text = text[:len(text)-1]          // removing the new line character from the end
 	float, _ := strconv.ParseFloat(text, 64)
 	fmt.Println(float + 1.11)

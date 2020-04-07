@@ -1,7 +1,7 @@
 ### Control Statements
-When we run a piece of code, go compiler starts from the top of the code file and start exicuting statements one by one sequentially.Control statements are used to control the flow of the code exicution.We can exicute or skip code blocks depending on the logic provided.We can also exicute a block of code for specified number of times in loop.
+When we run a piece of code, go compiler starts from the top of the code file and start executing statements one by one sequentially.Control statements are used to control the flow of the code execution.We can execute or skip code blocks depending on the logic provided.We can also execute a block of code for specified number of times in loop.
 #### If Statement
-If statement takes an expression which evaluates to be `true` or `false`.If the the expression evalutes to `true` then code block inside of if statement gets exicuted if the expression evalutes to `false` then code block inside of if statement gets skiped.We can use `else`, `if else` along with the `if` statement.
+If statement takes an expression which evaluates to be `true` or `false`.If the the expression evaluates to `true` then code block inside of if statement gets executed if the expression evaluates to `false` then code block inside of if statement gets skipped.We can use `else`, `if else` along with the `if` statement.
 ```go
 package main
 
@@ -11,7 +11,7 @@ func main() {
     isTrue := true
     x := 10
     name := "John"
-    // if statemet
+    // if statement
     if isTrue {
         fmt.Println("true")
     }
@@ -27,7 +27,7 @@ func main() {
     } else if name == "Sam" {
         fmt.Println("Name is Sam")   
     } else {
-        fmt.Println("Name is nither John nor Sam") 
+        fmt.Println("Name is neither John nor Sam") 
     }
     // if statement with value initialization
     /* we have declared num in the if statement and this variable can be accessible only in the block and it's branches where it's initialized
@@ -42,13 +42,13 @@ func main() {
 }
 ```
 #### For Statement
-`for` statement used to exicute a code block for specified amount of times.The basic structure of for statement is 
+`for` statement used to execute a code block for specified amount of times.The basic structure of for statement is 
 ```go
 for i := 0; i <= 5; i++ {
     fmt.Println(i) // prints 0, 1, 2, 3, 4, 5
 }
 ```
-We have initialized value of `i` to `0` in the first iteration then we have the conditional statement i.e `i<=5` which evaluates to be `true` or `false`.If it evaluates to be `true` we exicute the code block else we skip it.The third statement is to change the current value of `i` so we won't go into an infinite loop.In the second iteration onwards we evalute the conditional statement `i<=5` and after that `i++` statement.`i:=0` only gets evaluated in the first iteration.The above program can also be written as following
+We have initialized value of `i` to `0` in the first iteration then we have the conditional statement i.e `i<=5` which evaluates to be `true` or `false`.If it evaluates to be `true` we execute the code block else we skip it.The third statement is to change the current value of `i` so we won't go into an infinite loop.In the second iteration onwards we evaluate the conditional statement `i<=5` and after that `i++` statement.`i:=0` only gets evaluated in the first iteration.The above program can also be written as following
 ```go
 i := 0
 for i <= 5 {
@@ -56,9 +56,9 @@ for i <= 5 {
     i++ // (i += 1)
 }
 ```
-While increamenting the value of `i`, we don't have to increament in order of 1.We can increament in order of 2 like `i += 2`.We can also decrease the value of `i` like `i--` or `i -= 2`.There is no `while` statement in go.
+While incrementing the value of `i`, we don't have to increment in order of 1.We can increment in order of 2 like `i += 2`.We can also decrease the value of `i` like `i--` or `i -= 2`.There is no `while` statement in go.
 #### Switch Statement
-`switch` statement can be used in place of `if-else` statement.`switch` takes an expression and matchecs with the cases.The type of the expressing should match with the type of the cases.All the cases should be unique i.e should not contain duplicate value.Sometimes `switch` used without an expression and beheaves like `if-else` block. 
+`switch` statement can be used in place of `if-else` statement.`switch` takes an expression and matches with the cases.The type of the expressing should match with the type of the cases.All the cases should be unique i.e should not contain duplicate value.Sometimes `switch` used without an expression and behaves like `if-else` block. 
 ```go
 i := 10
 switch i {
@@ -91,7 +91,7 @@ switch {
 ```
 **output:**`i is equal to 2, 3 or 4`  
 #### Continue and Break Statement
-`continue` statement is used to skip itarations based on conditions and `break` statement is used to  break out of the loop.
+`continue` statement is used to skip iterations based on conditions and `break` statement is used to  break out of the loop.
 ```go
 for i := 0; i <= 10; i++ {
     if i == 5 {
