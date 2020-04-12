@@ -124,4 +124,4 @@ func main() {
 2
 func() uint
 ```
-* In go functions are first class functions i.e functions can be passed as arguments, assigned to variables and can be returned from another functions.In the above example we returned a function form `getNextNum()` and assigned to `getNext` variable. 
+* Go supports first class functions i.e functions can be passed as arguments, assigned to variables and can be returned from another functions.In the above example we returned a function form `getNextNum()` and assigned to `getNext` variable. 
