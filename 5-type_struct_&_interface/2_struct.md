@@ -150,3 +150,37 @@ City of the person one is  London
 Name of father is  Robert
 Name of brother is  Sam
 ```
+* We can declare an anonymous field to a struct of which is also of type struct and we access the values of the anonymous fields of struct
+directly. Those fields are called promoted fields
+```go
+type person struct {
+	name string
+	age  int
+	address
+}
+
+type address struct {
+	city    string
+	country string
+}
+
+func main() {
+	person1 := person{
+		name: "John",
+		age:  25,
+		address: address{
+			city:    "London",
+			country: "Englind",
+		},
+	}
+
+	fmt.Println("Name of the person one is ", person1.name)
+	fmt.Println("City of the person one is ", person1.city)
+}
+```
+**output:**
+```
+Name of the person one is  John
+City of the person one is  London
+```
+* We can also use field tags to attach metadata to fields of a struct
