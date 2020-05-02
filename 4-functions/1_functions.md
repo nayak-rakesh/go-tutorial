@@ -125,3 +125,17 @@ func main() {
 func() uint
 ```
 * Go supports first class functions i.e functions can be passed as arguments, assigned to variables and can be returned from another functions.In the above example we returned a function form `getNextNum()` and assigned to `getNext` variable. 
+
+* We can pass pointer to a function and if there is any change happens inside the function, the same change would manifest outside of the function.
+```go
+func changePtr(ptr *int) {
+	*ptr = *ptr + 1
+}
+
+func main() {
+	a := 20
+	changePtr(&a)
+	fmt.Printf("value of a after passing to the function %d\n", a)
+}
+```
+**output:**`value of a after passing to the function 21`  

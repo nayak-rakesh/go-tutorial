@@ -109,3 +109,11 @@ multArray := [3][2]int{
     {5, 6}, // prevents the compiler from inserting semicolon
 }
 ```
+* `[]byte` is required to when we want to write something in to files. it represents slice of `uint8` which also represents code points of ascii character(0 - 255). We can convert strings to `[]byte`.
+```go
+func main() {
+	num := []byte("hello")
+	fmt.Println(num)
+}
+```
+**output:**`[104 101 108 108 111]`
