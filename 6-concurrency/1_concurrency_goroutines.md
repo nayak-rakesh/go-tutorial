@@ -63,7 +63,7 @@ import (
 var wg sync.WaitGroup
 
 func routine(index string) {
-	defer wg.Done() // calles when function finishes execution
+	defer wg.Done() // calls when function finishes execution
 	fmt.Printf("inside go routine %s\n", index)
 }
 
@@ -85,3 +85,29 @@ main goroutine ends
 * In the above example `Add()` creates a counter from the number passed as argument, which represents number of goroutines.
 * `Done()` is called at the end of each goroutine and it decrements the counter started by `Add()`
 * `Wait()` blocks the execution of the program until the counter is zero i.e all the goroutines finished executing.
+```go
+func routine(msg string) {
+	for i := 0; i <= 2; i++ {
+		fmt.Printf("%s\n", msg)
+	}
+}
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		routine("hello world")
+		wg.Done()
+	}()
+	wg.Wait()
+}
+```
+**output:**
+```
+hello world
+hello world
+hello world
+```
+* Anonymous function calls `routine()` but if we can pass a pointer to the `routine()` and use `Done()` inside `routine()`. But 
+we shouldn't do that because `routine()` should only contain the logic not the routine related stuffs.
+* Se we can do it with an anonymous function. 

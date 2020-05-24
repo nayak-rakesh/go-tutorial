@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 func main() {
-	var ch chan int // cd is variable of type channel with zero value (nil)
+	var ch chan int // ch is variable of type channel with zero value (nil)
 	fmt.Println(ch)
 	ch = make(chan int)
 	fmt.Printf("Type of ch: %T\n", ch)
@@ -54,3 +54,185 @@ main routine finished
 * When `routine()` is called it will return automatically and control will return to main routine but as we haven't written to the finish channel the reading from the channel(`readChannel := <-finish`) will block the execution of the main routine.
 * Again control will go inside `routine()` and data will be written to the channel which will enable the `readChannel := <-finish` line in the main routine to read from the channel.
 * After reading from the channel rest of the main routine will finish executing. We can see that we don't need to use `sync` or `time` packages to stop the execution of main routine. 
+```go
+func routine(msg string, ch chan string) {
+	for i := 0; i <= 2; i++ {
+		ch <- msg
+	}
+	close(ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go routine("hello world", ch)
+
+	for {
+		msg, open := <-ch
+		if !open {
+			break
+		}
+		fmt.Println(msg)
+	}
+}
+```
+**output:**
+```
+hello world
+hello world
+hello world
+```
+* In the above example in the main routine we are trying to read from channel in an infinite loop. In the `routine()` we are sending values through routine
+and after we finish sending we close the channel. `open` become false once we closed the channel and we break out of the loop.
+* If we don't close the channel and try to read from the channel after `routine()` is finished executing we can go into deadlock. If we try to read from a
+closed channel we will get error. So we check if a channel is closed or not and break out of the loop
+```go
+func routine(msg string, ch chan string) {
+	for i := 0; i <= 2; i++ {
+		ch <- msg
+	}
+	close(ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go routine("hello world", ch)
+
+	for msg := range ch {
+		fmt.Println(msg)
+	}
+}
+```
+* In the above example we iterate over a channel and printing the values as long as channel is closed. This is the better way than the previous example.
+```go
+func main() {
+	ch := make(chan string)
+	ch <- "hello world"
+
+	msg := <-ch
+	fmt.Println(msg)
+}
+```
+**output:**`fatal error: all goroutines are asleep - deadlock!`  
+* In the above example we try to send a value but the line which try to read from the channel doesn't get to execute so the program goes in a deadlock. We can
+solve the issue by sending from another goroutine or by creating a buffered channel.
+### Buffered channels
+* The channels discussed before is called unbuffered channels i.e doesn't have capacity.
+* Buffered channel has capacity i.e we can specify how much data we can write to a channel. We can fill the buffered channel without the corresponding receiver and it won't block the code.
+* If the channel holds maximum data, the writing will be blocked until a goroutine reads from the channel.
+```go
+func main() {
+	ch := make(chan string, 2)
+	ch <- "hello world"
+
+	msg := <-ch
+	fmt.Println(msg)
+}
+```
+**output:**```hello world```  
+```go
+func main() {
+	ch := make(chan string, 2)
+	ch <- "hello world"
+	ch <- "hello world again"
+
+	msg := <-ch
+	fmt.Println(msg)
+	msg = <-ch
+	fmt.Println(msg)
+}
+```
+**output:**
+```
+hello world
+hello world again
+```
+* In the above examples we can see, we can fill up to the capacity of the channel and it won't block the code. We have to read from channel by range if we want
+to read all the values. 
+* If we try to write to channel beyond it's capacity without reading from it, the program will go to deadlock. If we want to send more values, we first have to read form the channel which will empty the channel to make space for more values to send to the channel. See from the examples below
+```go
+func main() {
+	ch := make(chan string, 2)
+	ch <- "hello world"
+	ch <- "hello world again"
+	ch <- "deadlock"
+
+	msg := <-ch
+	fmt.Println(msg)
+	msg = <-ch
+	fmt.Println(msg)
+}
+```
+**output:**`fatal error: all goroutines are asleep - deadlock!`  
+```go
+func main() {
+	ch := make(chan string, 2)
+	ch <- "hello world"
+	ch <- "hello world again"
+	<-ch // reading from ch which makes space to send value
+	ch <- "no deadlock"
+
+	msg := <-ch
+	fmt.Println(msg)
+	msg = <-ch
+	fmt.Println(msg)
+}
+```
+**output:**
+```
+hello world again
+no deadlock
+```
+```go
+func main() {
+	ch1 := make(chan string)
+	ch2 := make(chan string)
+
+	go func() {
+		for i := 0; i <= 5; i++ {
+			ch1 <- "500 millisecond"
+			time.Sleep(time.Millisecond * 500)
+		}
+	}()
+	go func() {
+		for i := 0; i <= 5; i++ {
+			ch2 <- "2 second"
+			time.Sleep(time.Second * 2)
+		}
+	}()
+
+	for i := 0; i <= 5; i++ {
+		fmt.Println(<-ch1)
+		fmt.Println(<-ch2)
+	}
+}
+```
+* If we run the above code we will see that reading from ch1 will be delayed even though it is ready to send value much sooner because program has to wail for 2 second to read from ch2.  
+```go
+func main() {
+	ch1 := make(chan string)
+	ch2 := make(chan string)
+
+	go func() {
+		for i := 0; i <= 5; i++ {
+			ch1 <- "500 millisecond"
+			time.Sleep(time.Millisecond * 500)
+		}
+	}()
+	go func() {
+		for i := 0; i <= 5; i++ {
+			ch2 <- "2 second"
+			time.Sleep(time.Second * 2)
+		}
+	}()
+
+	for {
+		select {
+		case msg1 := <-ch1:
+			fmt.Println(msg1)
+		case msg2 := <-ch2:
+			fmt.Println(msg2)
+		}
+	}
+}
+```
+* The above code would print message from ch1 more frequently as it is available early than ch2.

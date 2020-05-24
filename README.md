@@ -5,3 +5,5 @@ This repository is collection of resources about golang for beginners who just h
 * [Control Statements](./2-control_statements)
 * [Array, Slice, Map, Pointer](./3-array_slice_map_pointer)
 * [Function](./4-functions)
+* [Type, Struct, Interface](./5-type_struct_&_interface)
+* [Concurrency](/.6-concurrency)
