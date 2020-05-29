@@ -236,3 +236,56 @@ func main() {
 }
 ```
 * The above code would print message from ch1 more frequently as it is available early than ch2.
+#### Concurrency Patterns
+* Concurrency pattern is a kind of design pattern that deals with efficient use of multi-threading and concurrency.
+##### Worker pools pattern
+* In this pattern we have queue of jobs to be done and number of concurrent workers pulling jobs out of the queue.
+```go
+func main() {
+	jobs := make(chan int, 100)
+	results := make(chan int, 100)
+
+	go worker(jobs, results)
+	go worker(jobs, results)
+	go worker(jobs, results)
+
+	for i := 0; i < 20; i++ {
+		jobs <- i
+	}
+	close(jobs)
+
+	for j := 0; j < 20; j++ {
+		fmt.Println(<-results)
+	}
+}
+
+func worker(jobs <-chan int, results chan<- int) {
+	for n := range jobs {
+		results <- fib(n)
+	}
+}
+
+func fib(n int) int {
+	arr := make([]int, n+1)
+	for i := 0; i <= n; i++ {
+		arr[i] = -1
+	}
+
+	if arr[n] != -1 {
+		return arr[n]
+	}
+
+	if n == 0 {
+		arr[n] = 0
+		return arr[n]
+	} else if n == 1 {
+		arr[n] = 1
+		return arr[n]
+	} else {
+		arr[n] = fib(n-1) + fib(n-2)
+		return arr[n]
+	}
+}
+```
+* In the above example we are calculating nth fibonacci number concurrently. `worker()` receives `jobs` channel which will be used only to read the jobs from and `results` channel which will be used only to send the data to.
+* As we are using buffered channel, it won't block the execution.
