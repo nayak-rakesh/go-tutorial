@@ -1,5 +1,7 @@
 ### Pointer
-Pointers are also a kind of variable which stores memory address of another variable.When we create a variable and assign a value to it, compiler stores the value in a memory location and label it with the variable name.Using pointers, we can get the memory address of the variable and store it in another variable.
+* Everything in go is pass by value (i.e what you see is what you get). So when we pass a pointer, we are passing another value but the value just happens
+to be a pointer.
+* Pointers are also a kind of variable which stores memory address of another variable.When we create a variable and assign a value to it, compiler stores the value in a memory location and label it with the variable name.Using pointers, we can get the memory address of the variable and store it in another variable.
 ```go
 package main
 
@@ -54,3 +56,53 @@ New value of variable num is, 11
 ```
 * Pointer arithmetic is not possible in go.Pointers can be passed as argument to a function which we will see in future.
 * As pointers refer to the memory location of a variable, any change using pointer would change the value of the original variable.
+
+### Escape Analysis
+```go
+type user struct {
+	name string
+	age  int
+}
+
+func main() {
+	u1 := f1()
+	u2 := f2()
+}
+
+func f1() user {
+	u1 := user{
+		name: "John",
+		age:  25,
+	}
+	return u
+}
+
+func f2() *user {
+	u2 := user{
+		name: "John",
+		age:  25,
+	}
+	return &u
+}
+```
+
+```
+  Call Stack      Heap             Call Stack       Heap
+   |      |     |      |            |       |     |      | 
+   |f1(u1)|     |      |            |f2(*u2)|     |      |        
+   |------|     |      |            |-------|     |  u2  |
+   | main |     |      |            | main  |     |      |   
+   | u1   |     |      |            |u1 *u2 |     |      |         
+   |______|     |______|            |_______|     |______|
+main go routine                  main go routine
+```
+* Escape analysis(Static code analysis) determines whether a variable should initialized on stack or heap. It's done by compiler. 
+* Stacks are self cleaning i.e when `main` calls `f1` or any other function it will take a slice of stack on top of main slice and clean it and it will
+initialize variables for that function inside the slice. All the variables stored in the slice above the main slice that has been created by previous function calls will be cleaned in the cleaning process.
+* In the above example when `f1` returns and `f2` is called, the memory used by `f1` will be cleaned and will allocated to `f2` for use. 
+* As we know everything in go is pass by value. In case of `f1`, `main` will get a copy of `u1`. So now we have two copies one in `main` and another in `f1`.
+* In the second function call `f2`, all the variable are cleaned up above the main slice so `u1` will cleaned from slice above the `main` slice but we still have a copy of `u1` in `main`.
+* In the second function call we are initializing `u2` and returning a pointer to the value `u2`( in the function `f2`). But we know that `u2` going to be cleaned up in the next function call while main will still have a pointer(`*u2`) that points towards a value(`u2` in `f2`) that doesn't exist.
+* To avoid this situation the compiler during escape analysis determines that `u2` should stay on heap instead of stack.
+* There is a cost to it. When something gets initialized in heap garbage collector has to clean it up as heap not self cleaning which in turn cause performance issue.
+* Even though `u2` is in the heap, while accessing `u2` in `f2` we use value syntax not the pointer syntax.  

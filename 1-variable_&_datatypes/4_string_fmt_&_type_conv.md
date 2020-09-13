@@ -1,4 +1,17 @@
-### String Foramtting
+* Strings in golang are used to hold textual data and is represented by data structure that is consists of two parts. 
+* One part is a pointer that points to the backing array that contains the actual string and another part contains the size of the string in bytes. 
+* Each part has memory allocated depending upon the architecture of the computer.
+```
+ ______
+|      |                                            
+| ptr  |---->|h|e|l|l|o| (5 bytes sting array)                
+|______|                                  
+|      |                            
+|len(5)|                                      
+|______|
+```
+
+### String Formatting
 String formatting can be done be `Printf()` provided by `fmt` package.Go provides many verbs for string formatting.Let's see some examples
 ```go
 package main
@@ -57,7 +70,7 @@ func main() {
 int float64 uint
 value of a is 8.400000
 ```  
-To convert from int to string or string to int or int to int64, `strconv` package is used
+* To convert from int to string or string to int or int to int64, `strconv` package is used
  ```go
  package main
 

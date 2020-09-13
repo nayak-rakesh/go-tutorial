@@ -15,6 +15,8 @@ GO is a statically typed language i.e every variable always have a particular ty
 3. Boolean
     These are one bit integer used to represent either `true` or `false`.
 
+* In go when one type is converted to another type, a new memory is allocated depending upon type and the value is copied to the memory location.
+
 ## OPERATORS
 Operators are different characters which are used to carry out different operations on operands.
 1. Arithmetic Operators

@@ -21,12 +21,13 @@ func main() {
 	}
 
     person2 := person{"Sam", 26, "New York"} // created person2 of struct type person 
-    
-	var person3 person // initialized with zero values
-	person3.name = "Jenny" // assigning value to a field
+	
+	person3 := {} // initialized with zero values
+	var person4 person // initialized with zero values (idiomatic)
+	person4.name = "Jenny" // assigning value to a field
 
-	person4 := new(person) // with new keyword
-	person4.name = "John"
+	person5 := new(person) // with new keyword
+	person5.name = "John"
 
 	fmt.Println("Name of the person one is ", person1.name) // accessing the property
 	fmt.Println("Name of the person two is ", person2.name)
@@ -39,9 +40,15 @@ Name of the person two is  Sam
 ```
 * If we create a variable of type struct without assigning values or we assign values of only few fields, the fields without values would initialized
 to their respective zero values 
-* We also can define and create struct in a single statement. These structs are called anonymous struct.
+* We also can define and create struct in a single statement (literal struct type i.e struct which has no name). These structs are called `anonymous struct`.
 ```go
 func main() {
+	// initialized to zero value
+	var address struct {
+		city    string
+		zip     int
+	}
+
 	person := struct {
 		name    string
 		age     int
@@ -56,6 +63,32 @@ func main() {
 }
 ```
 **output:**`John`  
+
+* We have to explicitly convert named types (`cat` and `dog` in below example) while assignment but it's not required for anonymous types
+```go
+type cat struct {
+	name   string
+	colour string
+}
+
+type dog struct {
+	name   string
+	colour string
+}
+
+func main() {
+	var c cat
+	var d dog
+	var animal struct {
+		name   string
+		colour string
+	}
+	d = dog(c) // explicit conversion required for named types
+	c = animal // implicit conversion happens for unnamed type variables by compiler
+
+	fmt.Println(c, d)
+}
+```
 * We also can define pointers to a struct. It's pretty much the same as creating pointers to other data types.
 ```go
 type person struct {
