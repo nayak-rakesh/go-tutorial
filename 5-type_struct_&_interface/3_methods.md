@@ -42,7 +42,6 @@ Address of the person one is  London
 ```  
 * The receiver of a function can be a value or a pointer.The above example we defined two methods from which `getName()` is value receiver and `getAge()`
 is pointer receiver.
-* The changes in value of a field in pointer receiver function would reflect in calling instance.
-* We can see that even though method `getAddress()` is a pointer receiver, we can call the method with a pointer. In similar fashion, we can also
+* Pointer receiver methods can mutate the value of the operating instance of a type but value receiver methods can't.
+* We can see that even though method `getAddress()` is a value receiver, we can call the method with a pointer. In similar fashion, we can also
 call a value receiver method with a pointer.
-* Important point to remember that function with value argument will take only value and function with pointer argument will take only pointer.

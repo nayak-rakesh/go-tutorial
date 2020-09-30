@@ -58,6 +58,7 @@ New value of variable num is, 11
 * As pointers refer to the memory location of a variable, any change using pointer would change the value of the original variable.
 
 ### Escape Analysis
+* Basic understanding of function and struct is required.
 ```go
 type user struct {
 	name string

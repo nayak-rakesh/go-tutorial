@@ -32,7 +32,7 @@ Enter First Number: 78.388
 Enter Second Number: 388.83
 467.218000
 ```
-If you want to read the whole line with spaces, you can use `bufio` and `os` packages.In case if you want an integer or float as input you have to explicitly convert it using `ParseInt()` or `ParseFloat()` functions.
+If you want to read the whole line with spaces, you can use `bufio` and `os` packages. In case if you want an integer or float as input you have to explicitly convert it using `ParseInt()` or `ParseFloat()` functions.
 ```go
 package main
 

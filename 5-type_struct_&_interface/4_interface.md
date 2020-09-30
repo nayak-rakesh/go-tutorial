@@ -2,7 +2,7 @@
 * Interface is also an user defined type which contains set of methods and method signature.
 * When a custom type implements all those methods defined by an interface, we can safely say that the type implements the interface.
 ```go
-type iPerson interface {
+type Person interface {
 	getName() string
 	getAge() int
 	getAddress() string
@@ -27,13 +27,13 @@ func (p person) getAddress() string {
 }
 
 func main() {
-	var i iPerson
+	var p Person
 	person1 := person{
 		name:    "John",
 		age:     25,
 		address: "London",
 	}
-	i = &person1 // as person struct implements all methods of interface we can assign person struct to interface
+	p = &person1 // as person struct implements all methods of interface we can assign person struct to interface
 
 	fmt.Println("Name of the person one is ", i.getName())
 	fmt.Println("Age of the person one is ", i.getAge())
@@ -52,7 +52,7 @@ methods defined in interface is implemented by the struct with a pointer receive
 #### Structure Of Interface
 * Interface represented as type, value pair in go.
 ```go
-type iPerson interface {
+type Person interface {
 	getName() string
 	getAge() int
 	getAddress() string
@@ -77,15 +77,15 @@ func (p person) getAddress() string {
 }
 
 func main() {
-	var i iPerson
+	var p Person
 	person1 := person{
 		name:    "John",
 		age:     25,
 		address: "London",
 	}
-	i = person1
-	fmt.Printf("Type: %T\n", i)
-	fmt.Printf("Value: %v\n", i)
+	p = person1
+	fmt.Printf("Type: %T\n", p)
+	fmt.Printf("Value: %v\n", p)
 }
 ```
 **output:**

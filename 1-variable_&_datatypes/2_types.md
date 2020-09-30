@@ -14,6 +14,20 @@ GO is a statically typed language i.e every variable always have a particular ty
     Strings are immutable sequence of bytes.Text strings are UTF-8 encoded sequence of Unicode code points.
 3. Boolean
     These are one bit integer used to represent either `true` or `false`.
+4. Struct
+    These are user defined types with multiple fields and functions associated with it. It's like a `class` in other programming language.
+    ```go
+    type person struct {
+        name string
+        age  int
+    }
+    ```
+5. Interface
+    We will learn more in future
+6. Pointer
+    These are datatype which holds the memory address of a variable of a particular type. So the value inside a pointer is an memory address.
+7. Channels
+    We will learn about it in concurrency.
 
 * In go when one type is converted to another type, a new memory is allocated depending upon type and the value is copied to the memory location.
 

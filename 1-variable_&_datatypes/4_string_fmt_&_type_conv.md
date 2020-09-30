@@ -70,7 +70,7 @@ func main() {
 int float64 uint
 value of a is 8.400000
 ```  
-* To convert from int to string or string to int or int to int64, `strconv` package is used
+* To convert from `int to string` or `string to int`, `strconv` package is used.
  ```go
  package main
 
@@ -100,7 +100,7 @@ int
 1234
 string
 ```  
-ParseFloat() and ParseInt() functions are used to convert strings to floats(float64) and integers(int64) respectively
+* ParseFloat() and ParseInt() functions are used to convert strings to floats(float64) and integers(int64) respectively.
 ```go
 package main
 
