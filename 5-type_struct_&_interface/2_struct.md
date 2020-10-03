@@ -184,7 +184,7 @@ Name of father is  Robert
 Name of brother is  Sam
 ```
 * We can declare an anonymous field to a struct of which is also of type struct and we access the values of the anonymous fields of struct
-directly. Those fields are called promoted fields
+directly. Those fields are called promoted fields.
 ```go
 type person struct {
 	name string

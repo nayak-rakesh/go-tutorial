@@ -126,3 +126,164 @@ Value: 20
 Type: struct { name string }
 Value: {John}
 ```
+#### Method Sets
+* When we assign a type to an interface, the concrete data gets a method set depending upon the nature of concrete data.
+* If we assign a value to an interface then all the methods that are implemented by using value receiver would be included in method set.
+* If we assign a pointer to an interface then all the method that are implemented by using value receiver as well as pointer receiver would be included in method set.
+```go
+type printer interface {
+	getName() string
+	getAge() int
+}
+
+type person struct {
+	name string
+	age  int
+}
+
+func (p person) getName() string {
+	return p.name
+}
+
+func (p *person) getAge() int {
+	return p.age
+}
+
+func printInfo(p printer) {
+	fmt.Println(p.getName())
+	fmt.Println(p.getAge())
+}
+
+func main() {
+	per := person{
+		name: "John",
+		age:  25,
+	}
+	// printInfo(per) this will give error as getAge() uses pointer receiver
+	printInfo(&per)
+}
+```
+**output**
+```
+John
+25
+```
+* As `getAge()` method is implemented by pointer receiver, we have to pass pointer to the variable i.e `&per` as argument so that both the method would get included in the method set and it will satisfy the `printer` interface.
+* If we pass value of the variable i.e `per`, it will only include the method `getName()` in the method set excluding `getAge()` which won't satisfy the interface `printer` and we would get an error.
+* If any of the method uses pointer receiver, to satisfy an interface, we have to use pointer to a variable else we can use value of the variable.
+
+#### Composing struct and interface with interface
+* We can create new interface with using other interfaces
+```go
+type printName interface {
+	getName() string
+}
+
+type printAge interface {
+	getAge() int
+}
+
+type printer interface { // created using other interfaces
+	printName
+	printAge
+}
+
+type person struct {
+	name string
+	age  int
+}
+
+func (p person) getName() string {
+	return p.name
+}
+
+func (p *person) getAge() int {
+	return p.age
+}
+
+func printInfo(p printer) {
+	fmt.Println(p.getName())
+	fmt.Println(p.getAge())
+}
+
+func main() {
+	per := person{
+		name: "John",
+		age:  25,
+	}
+	printInfo(&per)
+}
+```
+* We can create struct with using other interfaces
+```go
+type runner interface {
+	run()
+}
+
+type eater interface {
+	eat()
+}
+
+type runEater interface {
+	runner
+	eater
+}
+
+type run struct {
+	canRun bool
+}
+
+func (r run) run() {
+	fmt.Println("Running")
+}
+
+type eat struct {
+	canEat bool
+}
+
+func (e eat) eat() {
+	fmt.Println("Eating")
+}
+
+type animal struct { // not embedding 
+	runner runner // any type that implements runner interface
+	eater  eater  // any type that implements eater interface
+}
+
+type human struct { // embedding
+	runner   // any type that implements runner interface
+	eater    // any type that implements eater interface
+}
+
+type bird struct {
+	eat
+}
+
+func print(r runEater) { // takes any type that has implemented runner and eater interface
+	r.run()
+	r.eat()
+}
+
+func main() {
+	a := animal{
+		runner: run{true},
+		eater:  eat{true},
+	}
+	a.runner.run()
+	a.eater.eat()
+	// print(a) // will give error as type animal doesn't have run() or eat() method
+
+	h := human{
+		runner: run{true},
+		eater:  eat{true},
+	}
+	h.run() // inner type promotion causes calling the function directly without any intermediate field
+	h.runner.run() // we can also use intermediate field to 
+	print(h) // won't give any error
+}
+```
+* Even though animal has inner types `runner` and `eater`, the methods those are implemented by inner types can not be associated with the parent types i.e `animal`. As `animal` type doesn't have methods `run()` or `eat()`, trying to pass as argument to `print()` function would give an error.
+* Type `human` has embedded field which results in inner type promotion so the parent struct i.e `human` gets access to all the methods directly which makes it compatible with `runEater` interface so we can pass `animal` type as argument to the function `print`.
+* If we use interface embedding, we can only access the methods. If we try to access the properties of actual struct that is used to create variable, we will get an error. We can not access `catEat` and `canRun` properties in the variable `a` and `h`.
+* We can embed struct inside another struct as we did with interface and through type promotion all the methods implemented by inner struct would be directly accessible to parent struct which can be used to make parent struct compatible with interfaces even though parent struct doesn't have any method directly associated.
+* We can assess properties of embedded struct as well as methods directly as if they belongs to the parent struct directly.

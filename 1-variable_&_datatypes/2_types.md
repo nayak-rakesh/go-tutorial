@@ -1,5 +1,6 @@
 ## TYPES
-GO is a statically typed language i.e every variable always have a particular type and it can not be changed.The different types available in go are 
+---
+* Golang is a statically typed language i.e every variable always have a type and it can not be changed. The different types available in go are 
 1. Numbers 
     1. Integer
         1. `uint8`,`uint16`,`uint32`,`uint64`.These are called unsigned integers.These data types hold only positive numbers with zero.
@@ -11,11 +12,11 @@ GO is a statically typed language i.e every variable always have a particular ty
         2. `NaN` for not a number(0/0).`+∞` and `+∞`
         It's generally convenient to use `float64`
 2. String
-    Strings are immutable sequence of bytes.Text strings are UTF-8 encoded sequence of Unicode code points.
+    Strings are immutable sequence of bytes. Text strings are UTF-8 encoded sequence of Unicode code points.
 3. Boolean
     These are one bit integer used to represent either `true` or `false`.
 4. Struct
-    These are user defined types with multiple fields and functions associated with it. It's like a `class` in other programming language.
+    These are user defined types with multiple fields and functions associated with it. It can be considered a `class` in other programming language.
     ```go
     type person struct {
         name string
@@ -29,7 +30,7 @@ GO is a statically typed language i.e every variable always have a particular ty
 7. Channels
     We will learn about it in concurrency.
 
-* In go when one type is converted to another type, a new memory is allocated depending upon type and the value is copied to the memory location.
+* In go when one type is converted to another type, a new memory is allocated depending upon type and the value is copied to the created memory location.
 
 ## OPERATORS
 Operators are different characters which are used to carry out different operations on operands.
