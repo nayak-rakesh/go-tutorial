@@ -63,12 +63,13 @@ func main() {
 #### Variadic Function
 Variadic functions can take variable number of arguments.The arguments form a slice with length equal to number of arguments passed.The syntax is `func f(a int, b ...int) {...}`.
 ```go
+func main() {
+	varFunc(1, 2, 3)
+}
+
 func varFunc(vals ...int) {
 	fmt.Println(vals, len(vals))
 	fmt.Printf("Type of val: %T\n", vals)
-}
-func main() {
-	varFunc(1, 2, 3)
 }
 ```
 **output:**
@@ -76,8 +77,21 @@ func main() {
 [1 2 3] 3
 Type of val: []int
 ```
-* Here parameter `vals` becomes a slice of type int with all the arguments passed to the function stored with in the slice(it's similar to `vals := []int{1, 2, 3}`).
-* Variadic argument always the last parameter on the variadic function.We can not make the first argument as variadic argument.
+* In the above parameter `vals` becomes a slice of type int with all the arguments passed to the function stored with in the slice(it's similar to `vals := []int{1, 2, 3}`).
+* If we have a variadic function, we can unpack a slice of same type while passing as argument.
+* Variadic argument always the last parameter on the variadic function. We can not make the first argument as variadic argument.
+```go
+func main() {
+	marks := []int{34, 56, 78}
+	name := "John"
+	printMark(name, marks...) // unpacking a slice
+}
+
+func printMark(name string, marks ...int) {
+	fmt.Println(name, " has marks: ", marks) // John  has marks:  [34 56 78]
+}
+```
+
 #### Closure
 Instead of calling a function we can create function inside of a function.The local function can access all the local variables of the parent function.A function which reference variables outside of it's scope is called closures.
 ```go
